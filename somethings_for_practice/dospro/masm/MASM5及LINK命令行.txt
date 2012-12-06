@@ -1,0 +1,57 @@
+MASM5及LINK命令行 
+
+ 
+
+最近在了解X86汇编语言，因为要用到微软的MASM5，在使用过程中发现一个很不方便的地方
+
+例如：masm 1.asm
+
+Microsoft (R) Macro Assembler Version 5.00
+Copyright (C) Microsoft Corp 1981-1985, 1987.  All rights reserved.
+
+Object filename [1.OBJ]:
+Source listing  [NUL.LST]:
+Cross-reference [NUL.CRF]:
+
+  50586 + 415030 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors 
+
+这里要按很多回车才采用默认的输出1.OBJ,NUL.LST,NUL.CRF
+
+试了才发现这样就可以完美地解决问题
+
+masm 1.asm,1.OBJ,NUL.LST,NUL.CRF,
+
+大家看出什么了吗？呵呵，这样都可以
+
+masm 1.asm,,,,   这个会有1.map,1.crf输出     
+
+同样的 masm 1.asm,1,NUL,NUL,
+
+总结得出的是：“参数可以从命令行中用逗号隔开一个一个传给MASM编译程序”
+
+于是，也得出了
+
+link 1.obj,1.exe,NUL.MAP,,
+
+以后编译程序就方便多了，可以用批处理，另外可以写MAKEFILE文件
+
+fileName = 1
+fileExte = exe
+obj = 1.obj
+
+$(fileName).$(fileExte):$(obj)
+    link $(obj),,NUL,,
+    
+$(obj):
+  masm $(fileName).asm,,NUL,NUL
+    
+clean:
+    del *.obj
+    del $(fileName).exe
+
+批处理这里就不给出，因为比较简单了。了解上面的原理就行
+
+
