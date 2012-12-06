@@ -1,0 +1,28 @@
+以前用过pppoe后也出现过问题，你试试下面的方法能够解决问题不。
+
+配置pppoe拨号上网，之后重启就发现右上角的网络配置图标不见了，在首选项中网络也配置不了，网络连接中只有一个if……down的东西。最后从网上搜索到了一个解决办法，如下：
+
+* Fix nm-applet can't execute error
+
+1. 修改/etc/dbus-1/system.d/NetworkManager.conf 和 /etc/dbus-1/system.d/nm-applet.conf將下列文字，如果為deny，改allow
+
+
+
+
+
+
+2. 重新啟動 dbus
+#sudo /etc/init.d/dbus restart
+
+* Fix nm-applet "No connection defined" error
+
+3. 停止 NetworkManager
+#sudo /etc/init.d/NetworkManager stop
+
+4. 刪除 /etc/network/interfaces 或是更名(rename)
+#sudo rm /etc/network/interfaces
+
+5. 重新启动 NetworkManager
+#sudo /etc/init.d/NetworkManager start
+
+6. 执行nm-applet

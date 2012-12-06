@@ -1,0 +1,3 @@
+sudo smartctl -a /dev/sda | grep Temp
+sudo smartctl -a /dev/sda | grep Load_Cycle_Coun
+

@@ -1,0 +1,27 @@
+推荐的解决方法：
+加入acpi脚本
+
+1. 为使用电源和电池的时候定制不同的hdparm参数。你可能需要把/dev/sda修改成你的硬盘设备。
+
+$sudo vi 99-hdd-ugly-fix.sh
+
+#!/bin/bash
+if on_ac_power; then
+# on AC so don't do any head parking
+hdparm -B 254 /dev/sda # you might need 255 or a different value
+else
+# either on battery or power status could not be determined
+# so quickly park the head to protect the disk
+hdparm -B 192 /dev/sda
+fi
+
+2. 将如上脚本安装到如下4个地方
+
+$sudo install 99-hdd-ugly-fix.sh /etc/acpi/resume.d/
+$sudo install 99-hdd-ugly-fix.sh /etc/acpi/start.d/
+$sudo install 99-hdd-ugly-fix.sh /etc/acpi/ac.d/
+$sudo install 99-hdd-ugly-fix.sh /etc/acpi/battery.d/
+
+这个方案比开启laptop mode简单且方便。
+
+应用之后开机，LCC不会再增加了。自己心里还是舒服很多。Peace of mind...
