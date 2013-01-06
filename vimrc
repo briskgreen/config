@@ -39,7 +39,7 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
+"set showcmd  	" Show (partial) command in status line.
 "set showmatch		" Show matching brackets.
 "set ignorecase		" Do case insensitive matching
 "set smartcase		" Do smart case matching
@@ -52,6 +52,10 @@ endif
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
+
+"backspace
+set backspace=indent,eol,start
+
 set cindent
 set nu
 set incsearch
@@ -75,14 +79,22 @@ let NERDTreeShowHidden=1
 let NERDChristmasTree=1
 let NERDTreeHighlightCursorline=1
 let NERDTreeShowLineNumbers=1
+
+map <F2> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+
 set go="无菜单 工具栏"
 set nocp
-set tags+=/etc/vim/tags/c
-set tags+=/etc/vim/tags/c++
-set tags+=/etc/vim/tags/qt4
-set tags+=/etc/vim/tags/gtk-2.0
-set tags+=/etc/vim/tags/gdk
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+"set tags+=/etc/vim/tags/c
+"set tags+=/etc/vim/tags/c++
+"set tags+=/etc/vim/tags/qt4
+"set tags+=/etc/vim/tags/gtk-2.0
+"set tags+=/etc/vim/tags/gdk
+"tags
+set tags+=/etc/vim/tags/strand
+
+map <S-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
@@ -101,3 +113,6 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 set iskeyword+=:
 autocmd BufEnter *.tex set sw=2
+
+"java
+setlocal omnifunc=javacomplete
