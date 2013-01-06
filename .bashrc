@@ -86,6 +86,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias w3m='TERM=jfbterm w3m'
     alias wine='LANG=zh_CN.gbk wine'
     alias winecfg='LANG=zh_CN.gbk winecfg'
+    alias build_gtk2='/home/brisk/build_gtk2.sh'
+    alias git_push='/home/brisk/git/git_push'
 fi
 
 # some more ls aliases
@@ -120,3 +122,4 @@ PATH=$QTDIR/bin:$PATH
 #MANPATH=$MANPATH:/usr/share/gtk-doc/man
 LD_LIBRARY_PATH=$QTDIR/lib:$LD_LIBRARY_PATH
 export QTDIR PATH MANPATH LD_LIBRARY_PATH
+export CLASSPATH=$CLASSPATH:/etc/vim
